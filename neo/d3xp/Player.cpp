@@ -3215,7 +3215,7 @@ void idPlayer::DrawHUD( idMenuHandler_HUD * _hudManager ) {
 	weapon.GetEntity()->UpdateGUI();
 
 	// weapon targeting crosshair
-	if ( !GuiActive() ) {
+	if ( !GuiActive() && !pm_thirdPerson.GetBool()) {
 		// don't show the 2D crosshair in stereo rendering, use the
 		// laser sight model instead
 		if ( _hudManager && _hudManager->GetHud() ) {
@@ -8874,9 +8874,9 @@ void idPlayer::OffsetThirdPersonView( float angle, float range, float height, bo
 	angles = viewAngles;
 	GetViewPos( origin, axis );
 
-	if ( angle ) {
+/*	if ( angle ) {
 		angles.pitch = 0.0f;
-	}
+	}*/
 
 	if ( angles.pitch > 45.0f ) {
 		angles.pitch = 45.0f;		// don't go too far overhead
@@ -8887,7 +8887,7 @@ void idPlayer::OffsetThirdPersonView( float angle, float range, float height, bo
 	view = origin;
 	view.z += 8 + height;
 
-	angles.pitch *= 0.5f;
+//	angles.pitch *= 0.5f;
 	renderView->viewaxis = angles.ToMat3() * physicsObj.GetGravityAxis();
 
 	idMath::SinCos( DEG2RAD( angle ), sideScale, forwardScale );
@@ -8917,8 +8917,8 @@ void idPlayer::OffsetThirdPersonView( float angle, float range, float height, bo
 		focusDist = 1.0f;	// should never happen
 	}
 
-	angles.pitch = - RAD2DEG( atan2( focusPoint.z, focusDist ) );
-	angles.yaw -= angle;
+//	angles.pitch = - RAD2DEG( atan2( focusPoint.z, focusDist ) );
+//	angles.yaw -= angle;
 
 	renderView->vieworg = view;
 	renderView->viewaxis = angles.ToMat3() * physicsObj.GetGravityAxis();
