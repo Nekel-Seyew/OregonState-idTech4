@@ -1,0 +1,8 @@
+build/
+base/
+*.sdf
+*.suo
+*/ipch/*
+*.user
+*.opensdf
+neo/amplitude/Debug/
